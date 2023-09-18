@@ -1,0 +1,65 @@
+/* ----------------- Line Charts ---------------------- */
+
+.lineChart {
+  width: 50%;
+}
+
+.lineChart > h3 {
+  color: white;
+  font-weight: 500;
+}
+
+.lineChart > .container {
+  width: 96%; /* Line Chart Size*/
+  height: 250px;
+
+  position: relative;
+  border: 1px solid grey;
+  border-radius: 20px;
+  background: #0d0d24;
+  padding: 50px 4% 50px 0;
+}
+
+.container > .buttons {
+  position: absolute;
+  top: 0;
+  right: 5%;
+}
+
+.buttons > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.buttons > div > h3 {
+  cursor: pointer;
+
+  color: grey;
+  font-weight: 500;
+  text-decoration-color: blue !important;
+  text-decoration-thickness: 5px !important;
+  margin-left: 10px;
+}
+
+/* ----------------- Line Charts ---------------------- */
+
+.barChart {
+  width: 30%;
+}
+
+.barChart > h3 {
+  color: white;
+  font-weight: 500;
+}
+
+.barChart > .container {
+  width: 96%; /* Bar Chart Size*/
+  height: 250px;
+
+  position: relative;
+  border: 1px solid grey;
+  border-radius: 20px;
+  background: #0d0d24;
+  padding: 50px 4% 50px 0;
+}
