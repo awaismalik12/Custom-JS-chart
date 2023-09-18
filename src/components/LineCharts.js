@@ -8,8 +8,8 @@ import {
   YAxis,
 } from "recharts";
 
-function LineCharts({ data }) {
-  const [dataState, setDataState] = useState("Per Trade");            //Change data visual
+function LineCharts({ data1, data2 }) {
+  const [dataState, setDataState] = useState("Per Trade"); //Change data visual
 
   return (
     <div className={"lineChart"}>
@@ -37,7 +37,7 @@ function LineCharts({ data }) {
         </div>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            data={data}
+            data={dataState === "Per Trade" ? data1 : data2}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           >
             <defs>

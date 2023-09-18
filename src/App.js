@@ -1,6 +1,5 @@
 import "./components/style.css";
 import LineCharts from "./components/LineCharts";
-import BarCharts from "./components/BarCharts";
 
 function App() {
   const lineChartData = [
@@ -99,7 +98,7 @@ function App() {
 
   return (
     <main style={{ width: "100%", minHeight: "100vh" }}>
-      <LineCharts data={lineChartData} />
+      <LineCharts data1={lineChartData} data2={[]} />
     </main>
   );
 }
