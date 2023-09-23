@@ -11,6 +11,21 @@ import {
 function LineCharts({ data1, data2 }) {
   const [dataState, setDataState] = useState("Per Trade"); //Change data visual
 
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      console.log(payload);
+      return (
+        <div className="customTooltip">
+          <p className="intro">{payload[0]?.payload?.date}</p>
+          <p className="intro">{label}</p>
+          <p className="label">{`${payload[0].name} : ${payload[0].value}`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div className={"lineChart"}>
       <h3>Balance Chart</h3>
@@ -18,17 +33,13 @@ function LineCharts({ data1, data2 }) {
         <div className={"buttons"}>
           <div>
             <h3
-              style={{
-                textDecoration: dataState === "Per Trade" ? "underline" : "",
-              }}
+              className={dataState === "Per Trade" ? "active" : ""}
               onClick={() => setDataState("Per Trade")}
             >
               Per Trade
             </h3>
             <h3
-              style={{
-                textDecoration: dataState === "Daily" ? "underline" : "",
-              }}
+              className={dataState === "Daily" ? "active" : ""}
               onClick={() => setDataState("Daily")}
             >
               Daily
@@ -53,9 +64,13 @@ function LineCharts({ data1, data2 }) {
               domain={[190.0, 225.0]}
               type="number"
             />
-            <Tooltip />
+            <Tooltip
+              position={{ y: -70 }}
+              cursor={{ opacity: "0.5", stroke: "#131397" }}
+              content={<CustomTooltip />}
+            />
             <Area
-              type="linear"
+              type="monotone"
               dataKey="trade"
               stroke="#0014ff"
               strokeWidth={2}
