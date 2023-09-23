@@ -5,17 +5,13 @@ import {
   Pie,
   PieChart,
   ResponsiveContainer,
-  Tooltip,
-  Sector
+  Sector,
 } from "recharts";
 
 const renderActiveShape = (props) => {
-  console.log('pie',props);
-  const RADIAN = Math.PI / 180;
   const {
     cx,
     cy,
-    midAngle,
     innerRadius,
     outerRadius,
     startAngle,
@@ -23,22 +19,26 @@ const renderActiveShape = (props) => {
     fill,
     payload,
     percent,
-    value
   } = props;
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + (outerRadius + 10) * cos;
-  const sy = cy + (outerRadius + 10) * sin;
-  const mx = cx + (outerRadius + 30) * cos;
-  const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
+      <rect
+        x={cx - 65}
+        y={cy - 35}
+        rx="20"
+        ry="20"
+        width="130"
+        height="70"
+        style={{ fill: "none", stroke: fill, strokeDasharray: "6" }}
+      />
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        {payload.name} {'('} {parseFloat(percent * 100).toFixed( 2 )} {'% )'}
+        <tspan x={cx} dy="-0.2em" fill="white">
+          {payload.name}
+        </tspan>
+        <tspan x={cx} dy="1.4em">
+          {"("} {parseFloat(percent * 100).toFixed(2)} {"% )"}
+        </tspan>
       </text>
       <Sector
         cx={cx}
@@ -47,6 +47,7 @@ const renderActiveShape = (props) => {
         outerRadius={outerRadius}
         startAngle={startAngle}
         endAngle={endAngle}
+        cornerRadius={10}
         fill={fill}
       />
     </g>
@@ -54,10 +55,17 @@ const renderActiveShape = (props) => {
 };
 
 function PieCharts({ data }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const onPieEnter = useCallback(
     (_, index) => {
       setActiveIndex(index);
+    },
+    [setActiveIndex]
+  );
+
+  const onPieLeave = useCallback(
+    (_, index) => {
+      setActiveIndex(-1);
     },
     [setActiveIndex]
   );
@@ -87,9 +95,16 @@ function PieCharts({ data }) {
                 dataKey="value"
                 label
                 onMouseEnter={onPieEnter}
+                onMouseLeave={onPieLeave}
               >
                 {data?.map((entry, index) => (
-                  <Cell style={{ outline: "none" }} key={`cell-${index}`} />
+                  <Cell
+                    style={{
+                      outline: "none",
+                      opacity: activeIndex < 0 ? "1" : "0.5",
+                    }}
+                    key={`cell-${index}`}
+                  />
                 ))}
               </Pie>
             </PieChart>
