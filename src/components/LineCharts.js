@@ -13,7 +13,6 @@ function LineCharts({ data1, data2 }) {
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      console.log(payload);
       return (
         <div className="customTooltip">
           <p className="intro">{payload[0]?.payload?.date}</p>

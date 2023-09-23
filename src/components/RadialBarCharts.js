@@ -8,10 +8,6 @@ import {
 } from "recharts";
 
 function RadialBarCharts({ data }) {
-  useEffect(() => {
-    console.log(window.innerWidth);
-  }, []);
-
   return (
     <div className={"radialChart"}>
       <h3>Wins & Losses</h3>

@@ -124,9 +124,9 @@ function App() {
   ];
 
   const pieChartData = [
-    { name: "US30.cash", value: 30.3, fill: "gold" },
-    { name: "US100.cash", value: 34.6, fill: "blue" },
-    { name: "GER30.cash", value: 33.7, fill: "orange" },
+    { name: "LUNA", value: 40.3, fill: "gold" },
+    { name: "USDT", value: 34.6, fill: "blue" },
+    { name: "GER", value: 33.7, fill: "orange" },
     { name: "BTC", value: 1.4, fill: "red" },
   ];
 
